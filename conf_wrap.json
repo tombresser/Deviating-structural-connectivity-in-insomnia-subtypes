@@ -1,0 +1,86 @@
+{
+    "general": {
+        "fslRootDir": "/usr/local/fsl",
+        "freesurferRootDir": "/Applications/freesurfer/7.1.1",
+        "templates": [
+            "aparc",
+            "lausanne120",
+            "schaefer100-yeo7"
+        ],
+        "reconstructionMethods": [
+            "DTI",
+            "CSD",
+            "CSD_DTI"
+        ],
+        "reconstructionSteps": [
+            "structural_preprocessing",
+			"parcellation",
+			"collect_region_properties",
+			"reconstruction_diffusion",
+			"reconstruction_fibers",
+			"reconstruction_fiber_properties",
+			"reconstruction_network"
+        ],
+        "maxNumberCompThreads": 1,
+        "freesurferDir": "../../derivatives/freesurfer/ses-01/SUBJECT",
+        "outputDir": "../../derivatives/cato/ses-01/SUBJECT/DWI_processed"
+    },
+    "structural_preprocessing": {
+        "rawBvalsFile": "ses-01/dwi/SUBJECT_ses-01_dwi.bval",
+        "rawBvecsFile": "ses-01/dwi/SUBJECT_ses-01_dwi.bvec",
+        "dwiFile": "ses-01/dwi/SUBJECT_ses-01_dwi.nii.gz",
+        "dwiB0ReversedFile": "",
+        "dwiReversedFile": "",
+        "synb0File": "../../derivatives/synb0-DISCO/ses-01/SUBJECT/b0_all.nii.gz",
+        "preprocessingScript": "TOOLBOXDIR/structural_preprocessing/preprocess_topup_eddy_synb0.sh",
+        "eddyVersion": "eddy",
+        "indexFile": "../../derivatives/cato/ses-01/SUBJECT/DWI_processed/index.txt",
+        "acqpFile": "../../../../acq_wrap.txt"
+    },
+    "parcellation": {
+        "forceFreesurferOverwrite": false
+    },
+    "reconstruction_diffusion": {
+        "exportNifti": {
+            "exportNifti": true,
+            "measures": [
+                "fractional anisotropy",
+                "axial diffusivity",
+                "radial diffusivity",
+                "mean diffusivity"
+            ]
+        }
+    },
+    "reconstruction_fibers": {
+        "NumberOfSeedsPerVoxel": 8,
+        "minFA": 0.1,
+        "maxAngleDeg": 45,
+        "startRegions": [
+            2,
+            41,
+            251,
+            252,
+            253,
+            254,
+            255
+        ],
+        "forbiddenRegions": [
+            1,
+            6,
+            7,
+            8,
+            40,
+            45,
+            46,
+            47
+        ],
+        "stopRegions": [
+            16,
+            28,
+            60
+        ]
+    },
+    "reconstruction_network": {
+        "minLengthMM": 0
+    }
+}

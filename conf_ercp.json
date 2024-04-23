@@ -1,0 +1,84 @@
+{
+   "general": {
+      "fslRootDir": "/usr/local/fsl",
+      "freesurferRootDir": "/Applications/freesurfer/7.1.1",
+      "templates": [
+         "aparc",
+         "lausanne120",
+         "schaefer100-yeo7"
+      ],
+      "reconstructionMethods": [
+         "DTI",
+         "CSD",
+         "CSD_DTI"
+      ],
+      "reconstructionSteps": [
+         "structural_preprocessing",
+			"parcellation",
+			"collect_region_properties",
+			"reconstruction_diffusion",
+			"reconstruction_fibers",
+			"reconstruction_fiber_properties",
+			"reconstruction_network"
+      ],
+      "maxNumberCompThreads": 1,
+      "freesurferDir": "../../derivatives/freesurfer/ses-w0/SUBJECT",
+      "outputDir": "../../derivatives/cato/ses-w0/SUBJECT/DWI_processed"
+   },
+   "structural_preprocessing": {
+      "rawBvalsFile": "ses-w0/dwi/SUBJECT_ses-w0_dir-ap_run-01_dwi.bval",
+      "rawBvecsFile": "ses-w0/dwi/SUBJECT_ses-w0_dir-ap_run-01_dwi.bvec",
+      "dwiFile": "ses-w0/dwi/SUBJECT_ses-w0_dir-ap_run-01_dwi.nii.gz",
+      "dwiB0ReversedFile": "ses-w0/fmap/SUBJECT_ses-w0_acq-dwi_dir-pa_run-01_epi.nii.gz",
+      "dwiReversedFile": "",
+      "preprocessingScript": "TOOLBOXDIR/structural_preprocessing/preprocess_topup_eddy.sh",
+      "eddyVersion": "eddy",
+      "revPhaseEncDim": 2
+   },
+   "parcellation": {
+      "forceFreesurferOverwrite": false
+   },
+   "reconstruction_diffusion": {
+      "exportNifti": {
+         "exportNifti": true,
+         "measures": [
+            "fractional anisotropy",
+            "axial diffusivity",
+            "radial diffusivity",
+            "mean diffusivity"
+         ]
+      }
+   },
+   "reconstruction_fibers": {
+      "NumberOfSeedsPerVoxel": 8,
+      "minFA": 0.1,
+      "maxAngleDeg": 45,
+      "startRegions": [
+         2,
+         41,
+         251,
+         252,
+         253,
+         254,
+         255
+      ],
+      "forbiddenRegions": [
+         1,
+         6,
+         7,
+         8,
+         40,
+         45,
+         46,
+         47
+      ],
+      "stopRegions": [
+         16,
+         28,
+         60
+      ]
+   },
+   "reconstruction_network": {
+      "minLengthMM": 0
+   }
+}
